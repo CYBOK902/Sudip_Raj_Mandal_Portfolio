@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sudip Raj Mandal is a Computer Science Engineer and Software Developer working across full-stack development, software testing, IoT, and digital technology.">
+<title>Sudip Raj Mandal — Portfolio</title>
+<meta name="theme-color" content="#0a0e17">
+<link rel="icon" href="images/hero-4.png" type="image/png">
+<script>
+  /* Set theme before first paint: saved choice wins, otherwise follow real local time. */
+  (function(){
+    try{
+      var saved = localStorage.getItem('sudip-theme');
+      var theme = saved;
+      if(theme !== 'light' && theme !== 'dark'){
+        var hour = new Date().getHours();
+        theme = (hour >= 6 && hour < 18) ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){
+      document.documentElement.setAttribute('data-theme','dark');
+    }
+  })();
+</script>
+<style>
+  @font-face {
+    font-family: 'JetBrains Mono';
+    src: local('JetBrains Mono');
+  }
+  :root{
+    --bg: #0a0e17;
+    --bg-2: #0d1220;
+    --glass: rgba(255,255,255,0.045);
+    --glass-border: rgba(255,255,255,0.09);
+    --glass-hi: rgba(255,255,255,0.09);
+    --ink: #e7ecf4;
+    --ink-dim: #8b96ab;
+    --ink-dimmer: #5c6780;
+    --accent: #5eead4;
+    --accent-2: #7c9eff;
+    --accent-dim: rgba(94,234,212,0.14);
+    --line: rgba(255,255,255,0.08);
+    --radius: 18px;
+    --grad-a: rgba(94,234,212,0.10);
+    --grad-b: rgba(94,148,234,0.08);
+    --shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  :root[data-theme="light"]{
+    --bg: #f5f8ff;
+    --bg-2: #ffffff;
+    --glass: rgba(255,255,255,0.72);
+    --glass-border: rgba(110,127,176,0.18);
+    --glass-hi: rgba(255,255,255,0.94);
+    --ink: #13213f;
+    --ink-dim: #465a80;
+    --ink-dimmer: #7582a4;
+    --accent: #0f766e;
+    --accent-2: #4f46e5;
+    --accent-dim: rgba(15,118,110,0.11);
+    --line: rgba(79,92,138,0.14);
+    --grad-a: rgba(14,165,233,0.13);
+    --grad-b: rgba(79,70,229,0.11);
+    --shadow: 0 28px 60px -28px rgba(15,23,42,0.24);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(900px 500px at 85% -10%, var(--grad-a), transparent 60%),
+      radial-gradient(700px 500px at -10% 20%, var(--grad-b), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, white 8%) 100%);
+    color:var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    transition: background-color .45s ease, color .35s ease;
+  }
+  body, .card, .topnav, .btn, .pill, .cert-link, .theme-toggle{
+    transition: background-color .4s ease, border-color .4s ease, color .35s ease, box-shadow .4s ease;
+  }
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--accent-dim); color:var(--accent);}
+
+  .mono{font-family:'JetBrains Mono','SF Mono',Consolas,monospace;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- layout shell ---------- */
+  .shell{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    background: rgba(10,14,23,0.62);
+    border-bottom:1px solid var(--line);
+  }
+  :root[data-theme="light"] .topnav{
+    background: rgba(255,255,255,0.68);
+    box-shadow: 0 12px 28px -22px rgba(30,41,59,0.28);
+  }
+  .topnav-inner{
+    max-width:1180px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px; position:relative;
+  }
+  .brand{font-size:14.5px; letter-spacing:0.02em; color:var(--ink);} 
+
+  /* Minimal hero/sequence styles so slideshow images render correctly */
+  .hero{display:flex; gap:28px; align-items:center; justify-content:space-between; padding:48px 0;}
+  .hero-photo{flex:0 0 46%; display:flex; flex-direction:column; align-items:flex-end;}
+  .sequence-shell{position:relative; width:100%; max-width:520px; aspect-ratio: 16/12; padding-top:75%; min-height:280px;}
+  .sequence-layer{position:absolute; inset:0; display:block; border-radius:18px; overflow:hidden; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));}
+  .sequence-layer img{width:100%; height:100%; object-fit:cover; display:block; -webkit-user-drag:none;}
+  .sequence-layer.back{transform:translate3d(-12px,12px,0) scale(.98); filter:brightness(.88);}
+  .sequence-layer.mid{transform:translate3d(-6px,6px,0) scale(.99); filter:brightness(.95);}
+  .sequence-layer.front{transform:none;}
+
+  .navlinks{display:flex; gap:20px; align-items:center; font-size:11px; color:var(--ink-dim);}
+  .navlinks a:hover, .foot-links a:hover{color:var(--accent);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .theme-toggle, .nav-toggle{border:1px solid var(--glass-border); background:var(--glass); color:var(--ink); cursor:pointer;}
+  .theme-toggle{width:38px; height:38px; border-radius:50%; display:grid; place-items:center;}
+  .theme-toggle svg{width:17px; height:17px;}
+  .icon-moon{display:none;}
+  :root[data-theme="light"] .icon-sun{display:none;}
+  :root[data-theme="light"] .icon-moon{display:block;}
+  .nav-toggle{display:none; width:38px; height:38px; border-radius:8px;}
+  .nav-toggle span, .nav-toggle::before, .nav-toggle::after{content:""; display:block; width:16px; height:1px; margin:4px auto; background:currentColor;}
+  .eyebrow-line{font-size:11px; color:var(--accent); letter-spacing:.03em; text-transform:uppercase;}
+  .dot{display:inline-block; width:7px; height:7px; margin-right:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px var(--accent-dim);}
+  h1{max-width:14ch; margin:22px 0 20px; font-size:clamp(34px,4.4vw,54px); line-height:1.12; letter-spacing:-.01em; font-weight:600;}
+  h1 .name{text-decoration-line:underline; text-decoration-color:var(--accent); text-decoration-thickness:2px; text-underline-offset:6px;}
+  h1 em{color:var(--accent); font-style:normal;}
+  .lede{max-width:600px; color:var(--ink-dim); font-size:17px;}
+  .hero-meta, .hero-actions, .pill-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center;}
+  .hero-meta{margin:26px 0 28px; color:var(--ink-dim); font-size:11px;}
+  .meta-chip, .pill{padding:6px 10px; border:1px solid var(--glass-border); border-radius:999px; background:var(--glass);}
+  .btn{display:inline-flex; align-items:center; min-height:42px; padding:0 15px; border:1px solid var(--glass-border); border-radius:8px; font-size:11px;}
+  .social-icon{width:15px; height:15px; flex:0 0 15px; display:block;}
+  .btn-solid{background:var(--accent); color:#071b1b; border-color:var(--accent);}
+  .btn-ghost:hover, .theme-toggle:hover{background:var(--glass-hi); border-color:var(--accent);}
+  .hero-photo .tag{margin-top:14px; color:var(--ink-dimmer); font-size:11px;}
+  .hero-photo .tag b{color:var(--ink-dim); font-weight:400;}
+  section{padding:72px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:26px;}
+  h2{font-size:30px; letter-spacing:-.03em;}
+  .idx, .label{color:var(--accent); font-size:11px; text-transform:uppercase;}
+  h3{font-size:15px; margin-bottom:14px;}
+  .details-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .about-row, .split-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;}
+  .card{padding:24px; border:1px solid var(--glass-border); border-radius:var(--radius); background:var(--glass); box-shadow:var(--shadow);}
+  .detail-item{min-height:104px;}
+  .value{margin-top:12px; font-size:15px; overflow-wrap:anywhere;}
+  .value a{color:var(--ink-dim);}
+  .value a:hover{color:var(--accent);}
+  .pill{font-size:12px; color:var(--ink-dim);}
+  .pill.soft{background:transparent;}
+  .timeline{display:grid; gap:12px;}
+  .timeline-item{display:grid; grid-template-columns:150px 1fr; gap:24px;}
+  .timeline-date{color:var(--accent); font-size:11px; text-transform:uppercase;}
+  .timeline-copy p, .project p, .contact-copy p{color:var(--ink-dim); font-size:14px;}
+  .timeline-copy strong{display:block; margin-bottom:5px; font-size:16px;}
+  .tl-item{position:relative; padding-left:28px; padding-bottom:24px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:""; position:absolute; left:4px; top:7px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:2px solid var(--accent);}
+  .timeline:has(.tl-item){position:relative; padding-left:0;}
+  .timeline:has(.tl-item)::before{content:""; position:absolute; left:8px; top:8px; bottom:8px; width:1px; background:linear-gradient(var(--accent), transparent 90%); opacity:.35;}
+  .tl-card{padding:22px 24px;}
+  .tl-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:6px;}
+  .tl-role{font-size:16px; font-weight:600; color:var(--ink);}
+  .tl-org{color:var(--accent); font-weight:500;}
+  .tl-date{font-size:12px; color:var(--ink-dimmer); white-space:nowrap;}
+  .tl-card ul{margin-top:10px; padding-left:18px; color:var(--ink-dim); font-size:14px;}
+  .tl-card li{margin-bottom:6px;}
+  .tl-card li::marker{color:var(--accent);}
+  .stack-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .stack-card{padding:24px;}
+  .stack-card h3{font-size:15px; font-weight:600; color:var(--ink); margin-bottom:4px;}
+  .stack-card .org{font-size:13px; color:var(--accent); margin-bottom:2px;}
+  .stack-card .meta, .pub-card .meta{font-size:12px; color:var(--ink-dimmer); margin-bottom:10px;}
+  .stack-card p{font-size:13.5px; color:var(--ink-dim);}
+  .list-simple{display:flex; flex-direction:column; gap:14px; padding:8px;}
+  .list-simple .row{display:flex; justify-content:space-between; align-items:center; padding:16px 20px;}
+  .list-simple .name{font-size:14.5px; color:var(--ink); font-weight:500;}
+  .list-simple .meta{font-size:12px; color:var(--ink-dimmer);}
+  .list-simple .right{display:flex; align-items:center; gap:14px;}
+  .stack-card .cert-link{display:inline-flex; margin-top:14px;}
+  .pub-card{padding:28px; display:flex; gap:20px; align-items:flex-start;}
+  .pub-icon{width:44px; height:44px; border-radius:12px; flex-shrink:0; background:var(--accent-dim); border:1px solid rgba(94,234,212,.25); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:18px;}
+  .pub-card h3{font-size:16px; font-weight:600; color:var(--ink); margin-bottom:6px;}
+  .pub-card p{font-size:14px; color:var(--ink-dim); max-width:70ch;}
+  .proj-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;}
+  .proj-card{padding:26px; display:flex; flex-direction:column; height:100%;}
+  .proj-card .kicker{font-size:11.5px; color:var(--ink-dimmer); margin-bottom:10px;}
+  .proj-card h3{font-size:16.5px; font-weight:600; margin-bottom:10px; color:var(--ink);}
+  .proj-card p{font-size:14px; color:var(--ink-dim); flex-grow:1;}
+  .proj-card .pill-row{margin-top:16px;}
+  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .project{min-height:220px; display:flex; flex-direction:column;}
+  .project .project-type{color:var(--accent); font-size:11px; text-transform:uppercase; margin-bottom:18px;}
+  .project .project-link{margin-top:auto; padding-top:24px; color:var(--ink); font-size:12px;}
+  .project .project-link:hover{color:var(--accent);}
+  .cert-list{display:grid; gap:10px;}
+  .cert-link{display:flex; justify-content:space-between; gap:20px; padding:15px 0; border-bottom:1px solid var(--line); color:var(--ink-dim); font-size:14px;}
+  .cert-link:hover{color:var(--accent);}
+  .meta-chip, .pill, .pill.soft, .tl-date, .stack-card .meta, .pub-card .meta, .list-simple .meta, .cert-link, .proj-card .kicker, .copyright{color:var(--accent);}
+  .contact-copy{display:flex; align-items:end; justify-content:space-between; gap:24px;}
+  footer{border-top:1px solid var(--line); padding:24px 0 38px; color:var(--ink-dimmer); font-size:11px;}
+  .foot-inner{display:flex; justify-content:space-between; gap:20px;}
+  .foot-links{display:flex; flex-wrap:wrap; gap:16px;}
+  .reveal{animation:rise .7s both;}
+  @keyframes rise{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  @media (max-width:900px){.navlinks{gap:12px}.hero{align-items:flex-start}.details-grid{grid-template-columns:repeat(2,1fr)}.project-grid,.proj-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:680px){.shell,.topnav-inner{padding-left:20px; padding-right:20px}.nav-toggle{display:block}.navlinks{display:none; position:absolute; top:64px; left:20px; right:20px; padding:14px; flex-direction:column; align-items:flex-start; background:var(--bg-2); border:1px solid var(--glass-border); border-radius:10px; box-shadow:var(--shadow)}.navlinks.open{display:flex}.hero{display:flex; flex-direction:column; padding:42px 0}.hero-photo{width:100%; align-items:stretch}.sequence-shell{max-width:none; min-height:0}.hero-photo .tag{text-align:right}.hero-actions .btn{flex:1; justify-content:center}.section-head{align-items:flex-start; flex-direction:column; gap:6px}.details-grid,.about-row,.split-grid,.project-grid,.proj-grid,.stack-grid{grid-template-columns:1fr}.timeline-item{grid-template-columns:1fr; gap:5px}.contact-copy,.foot-inner{align-items:flex-start; flex-direction:column}.foot-links{gap:10px}.tl-top{display:block}.tl-date{margin-top:6px}.pub-card{padding:20px;}}
+
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand mono">sudip<span>.</span>raj</div>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span>
+    </button>
+    <div class="navlinks mono" id="navMenu">
+      <a href="#details">Details</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certificates</a>
+      <a href="#training">Training</a>
+      <a href="#publication">Publication</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
+        <span class="icon-sun">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"></path></svg>
+        </span>
+        <span class="icon-moon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"></path></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow-line mono"><span class="dot"></span>Kathmandu, Nepal — available for engineering roles</div>
+      <h1><span class="name">Sudip Raj Mandal</span> Builds <em>Practical Software</em> with Purpose, Curiosity, and a Hands-on Engineering Mindset.</h1>
+      <p class="lede">Computer Science Engineer with hands-on experience in full-stack development, software testing, IoT, and digital technology. I enjoy turning ideas into practical solutions and continuously improving my skills through real-world projects, research, and engineering work.</p>
+      <div class="hero-meta mono" aria-label="Professional highlights">
+        <span class="meta-chip">Software Development</span>
+        <span class="meta-chip">IoT &amp; Electronics</span>
+        <span class="meta-chip">Technical Content</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-solid mono" href="mailto:sudiprazzmandal123@gmail.com">Email me</a>
+        <a class="btn btn-ghost mono" href="https://github.com/CYBOK902" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost mono" href="https://www.linkedin.com/in/sudiprajmandal" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost mono" href="https://www.youtube.com/@cybok6620/videos" target="_blank" rel="noopener"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube ↗</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="sequence-shell" aria-label="Portfolio profile visual sequence">
+        <div class="sequence-layer back"></div>
+        <div class="sequence-layer mid"></div>
+        <div class="sequence-layer front">
+          <img src="images/hero-1.png" alt="Portfolio image" loading="eager" decoding="async">
+        </div>
+      </div>
+      <div class="tag mono">Desk setup <b>· Kathmandu</b></div>
+    </div>
+  </header>
+
+  <!-- DETAILS -->
+  <section id="details" class="reveal">
+    <div class="section-head">
+      <h2>Details</h2>
+      <span class="idx mono">01 / About & contact</span>
+    </div>
+    <div class="details-grid">
+      <div class="card detail-item reveal reveal-stagger" style="--i:0;">
+        <div class="label mono">Location</div>
+        <div class="value">Kathmandu, Nepal</div>
+      </div>
+      <div class="card detail-item reveal reveal-stagger" style="--i:1;">
+        <div class="label mono">Phone</div>
+        <div class="value">+977 9844510907</div>
+      </div>
+      <div class="card detail-item reveal reveal-stagger" style="--i:2;">
+        <div class="label mono">Email</div>
+        <div class="value"><a href="mailto:sudiprazzmandal123@gmail.com">sudiprazzmandal123@gmail.com</a></div>
+      </div>
+      <div class="card detail-item reveal reveal-stagger" style="--i:3;">
+        <div class="label mono">Languages</div>
+        <div class="value">English, Nepali, Maithili, Hindi</div>
+      </div>
+    </div>
+
+    <div class="about-row">
+      <div class="card reveal reveal-stagger" style="--i:0;">
+        <h3 class="mono">About</h3>
+        <p style="color:var(--ink-dim); font-size:14.5px;">I’m a Computer Science Engineer who enjoys building things that work in the real world.</p>
+        <p style="color:var(--ink-dim); font-size:14.5px; margin-top:12px;">My experience spans software development, full-stack applications, QA/testing, IoT systems, digital marketing, and technical writing. I’ve worked in startup environments, contributed to technical publications, completed industry internships, and built projects combining software with hardware.</p>
+        <p style="color:var(--ink-dim); font-size:14.5px; margin-top:12px;">I’m particularly interested in opportunities where I can write code, solve problems, work with a team, and keep growing as an engineer.</p>
+      </div>
+      <div class="card reveal reveal-stagger" style="--i:1;">
+        <h3 class="mono">Skills</h3>
+        <div class="pill-row">
+          <span class="pill">Java</span>
+          <span class="pill">C++</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">SQL</span>
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">Bootstrap</span>
+          <span class="pill">PHP</span>
+          <span class="pill">React</span>
+          <span class="pill">MySQL</span>
+          <span class="pill">DBMS</span>
+          <span class="pill">Git</span>
+          <span class="pill">Testing &amp; QA</span>
+          <span class="pill">Sensors</span>
+          <span class="pill">Electronics</span>
+          <span class="pill">Embedded Systems</span>
+          <span class="pill">Automation</span>
+          <span class="pill soft">Digital Marketing</span>
+          <span class="pill soft">Technical Writing</span>
+          <span class="pill soft">SEO</span>
+          <span class="pill soft">Teamwork</span>
+          <span class="pill soft">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><h2>Professional Experience</h2><span class="idx mono">02 / Work history</span></div>
+    <div class="timeline">
+      <div class="tl-item"><div class="card tl-card"><div class="tl-top"><div><span class="tl-role">Software Engineer — Dev, Test &amp; Ops</span> · <span class="tl-org">Fasto Nepal Pvt. Ltd.</span></div><div class="tl-date mono">Apr 2025 – Sep 2025</div></div><ul><li>Developed and maintained application features for a grocery delivery platform.</li><li>Built and managed admin-panel functionality for orders and inventory.</li><li>Performed testing and debugging to improve application stability.</li><li>Worked with the team in a fast-paced startup environment.</li></ul></div></div>
+      <div class="tl-item"><div class="card tl-card"><div class="tl-top"><div><span class="tl-role">Content Writer</span> · <span class="tl-org">MeroJob Limited</span></div><div class="tl-date mono">Dec 2025 – Feb 2026</div></div><ul><li>Wrote SEO-focused articles on jobs, careers, HR, and recruitment.</li><li>Created social-media content and carousel posts.</li><li>Developed job descriptions and recruitment advertising copy.</li><li>Applied SEO principles to improve content structure and discoverability.</li></ul></div></div>
+      <div class="tl-item"><div class="card tl-card"><div class="tl-top"><div><span class="tl-role">Digital Media Marketing Manager</span> · <span class="tl-org">Sajilo Interior</span></div><div class="tl-date mono">Sep 2025 – Nov 2025</div></div><ul><li>Designed logos, banners, posters, and social-media creatives.</li><li>Created digital assets for web and social platforms.</li><li>Managed advertising campaigns across YouTube, Facebook, and Instagram.</li></ul></div></div>
+      <div class="tl-item"><div class="card tl-card"><div class="tl-top"><div><span class="tl-role">Content Writer Intern</span> · <span class="tl-org">GeeksforGeeks</span></div><div class="tl-date mono">Aug 2024 – Feb 2025</div></div><ul><li>Wrote technical articles with practical code examples across software development, testing, web technologies, and automation.</li><li>Followed editorial, originality, and SEO guidelines to improve technical documentation and content quality.</li></ul></div></div>
+    </div>
+  </section>
+
+  <section id="education"><div class="section-head"><h2>Education</h2><span class="idx mono">03 / Academic background</span></div><div class="card stack-card"><h3>Bachelor of Engineering in Computer Science</h3><div class="org">C.V. Raman Global University — Bhubaneswar, India</div><div class="meta mono">Graduated July 2024 · CGPA 7.52 · SGPA 9.00</div><p>Studied software engineering, programming, databases, web technologies, and computer systems, while applying these concepts through practical projects and an IEEE-published IoT research project.</p></div></section>
+
+  <section id="certifications"><div class="section-head"><h2>Certifications</h2><span class="idx mono">04 / Verified credentials</span></div><div class="card list-simple"><div class="row"><div><div class="name">Data Science (DS) — Certificate of Participation</div><div class="meta mono">upGrad Campus · Nov 2022 – Jan 2024</div></div><a class="cert-link mono" href="https://drive.google.com/file/d/1maskwqedvHCmuLz8_bKXz_OmMJVQpbgp/view?usp=sharing" target="_blank" rel="noopener">View ↗</a></div><div class="row"><div><div class="name">Content Writing Internship Certificate</div><div class="meta mono">GeeksforGeeks · 6 months, from 07 Aug 2024</div></div><a class="cert-link mono" href="https://drive.google.com/file/d/15mov6mmEXaIEttU93XYGnp7v8Hgp-1wt/view?usp=sharing" target="_blank" rel="noopener">View ↗</a></div><div class="row"><div><div class="name">Cognitel Design Thinking Training</div><div class="meta mono">Certificate</div></div></div></div></section>
+
+  <section id="training"><div class="section-head"><h2>Training</h2><span class="idx mono">05 / Programs & internships completed</span></div><div class="stack-grid"><div class="card stack-card"><h3>Web Development Training</h3><div class="org">Internshala Trainings</div><div class="meta mono">8 weeks · Certified 23 Sep 2022 · Top performer</div><p>HTML, CSS, Bootstrap, DBMS, PHP, JS, React, and a final project — completed through C.V. Raman Global University.</p><a class="cert-link mono" href="https://drive.google.com/file/d/1CPK1VKwRg7F02amVthfFxrU8NWE78uBf/view?usp=sharing" target="_blank" rel="noopener">View certificate ↗</a></div><div class="card stack-card"><h3>Web Development Internship</h3><div class="org">CodSoft · Remote</div><div class="meta mono">4 weeks · 20 Sep – 20 Oct 2023</div><p>Virtual internship covering hands-on web development tasks and projects.</p><a class="cert-link mono" href="https://drive.google.com/file/d/17neBRzbr_sD4NhEowY7JbqsMjUo-uGfB/view?usp=sharing" target="_blank" rel="noopener">View certificate ↗</a></div><div class="card stack-card"><h3>Web Development & Designing Internship</h3><div class="org">Oasis Infobyte · Remote</div><div class="meta mono">1 month · Completed 15 Sep 2023</div><p>Applied web development and design fundamentals across a set of practical internship tasks.</p><a class="cert-link mono" href="https://drive.google.com/file/d/1GTn3zo58Z2F9nbA9heRbz6q-4XLbUupA/view?usp=sharing" target="_blank" rel="noopener">View certificate ↗</a></div></div></section>
+
+  <section id="publication"><div class="section-head"><h2>Research &amp; Publication</h2><span class="idx mono">06 / Research</span></div><div class="card pub-card"><div class="pub-icon">✓</div><div><h3>IoT-Based Plant Monitoring System for Smart Irrigation</h3><div class="meta mono">IEEE ICCCNT · IIT Mandi · 2024</div><p>Designed and developed an IoT-based plant monitoring system capable of collecting soil and environmental data and using that information to support automated irrigation decisions. The project combined sensors, electronics, IoT concepts, and automation to create a practical smart-irrigation solution.</p><a class="cert-link mono" href="https://drive.google.com/file/d/1Yxk5TYs3YYWM6JSJoXczDEvlJ3ffYqhO/view?usp=sharing" target="_blank" rel="noopener">View publication ↗</a></div></div></section>
+
+  <section id="projects"><div class="section-head"><h2>Projects</h2><span class="idx mono">07 / Selected work</span></div><div class="proj-grid"><div class="card proj-card"><div class="kicker mono">RESEARCH · HARDWARE</div><h3>IoT Smart Irrigation System</h3><p>An IoT-based plant monitoring and irrigation system that collects soil and environmental data and uses sensor information to automate watering decisions.</p><div class="pill-row"><span class="pill">IoT</span><span class="pill">Sensors</span><span class="pill">Automation</span></div></div><div class="card proj-card"><div class="kicker mono">FULL-STACK · STARTUP</div><h3>Grocery Delivery Admin Panel</h3><p>Admin-side functionality developed for a grocery delivery platform, including order, inventory, and operational management.</p><div class="pill-row"><span class="pill">Full-Stack</span><span class="pill">QA</span><span class="pill">Admin Tools</span></div></div><div class="card proj-card"><div class="kicker mono">DESIGN · MARKETING</div><h3>Digital Brand &amp; Marketing Assets</h3><p>Created branding materials including logos, banners, posters, social creatives, and digital advertising campaigns.</p><div class="pill-row"><span class="pill">Branding</span><span class="pill">Digital Marketing</span><span class="pill">Social Media</span></div></div><div class="card proj-card"><div class="kicker mono">WEB · PERSONAL</div><h3>Personal Portfolio</h3><p>A self-built portfolio website designed and developed from scratch to showcase my engineering experience, projects, research, and skills.</p><div class="pill-row"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span></div></div></div></section>
+
+  <section id="contact"><div class="section-head"><h2>Let’s build something useful.</h2><span class="idx mono">08 / Get in touch</span></div><div class="card contact-copy"><div><p>I’m currently open to software engineering, web development, full-stack, IT, and technology-focused opportunities.</p><p style="margin-top:10px;">If you have an interesting project, opportunity, or idea, feel free to get in touch.</p></div><a class="btn btn-solid mono" href="mailto:sudiprazzmandal123@gmail.com">Email me</a></div></section>
+</div>
+
+<footer>
+  <div class="shell foot-inner">
+    <div class="copyright mono">© 2026 Sudip Raj Mandal</div>
+    <div class="foot-links mono">
+      <a href="mailto:sudiprazzmandal123@gmail.com">Email</a>
+      <a href="https://github.com/CYBOK902" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/sudiprajmandal" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.youtube.com/@cybok6620/videos" target="_blank" rel="noopener"><svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="hero-images.js"></script>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const themeToggle = document.getElementById('themeToggle');
+  const frontImage = document.querySelector('.sequence-layer.front img');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('sudip-theme', nextTheme);
+  });
+
+  const slides = Array.isArray(window.heroImages) ? window.heroImages : [];
+  let slideIndex = 0;
+  const showNextSlide = () => {
+    if (!frontImage || slides.length < 2) return;
+    slideIndex = (slideIndex + 1) % slides.length;
+    frontImage.style.opacity = '0';
+    window.setTimeout(() => {
+      frontImage.src = slides[slideIndex];
+      frontImage.style.opacity = '1';
+    }, 180);
+  };
+  frontImage?.addEventListener('error', () => { frontImage.src = 'images/hero-4.png'; });
+  window.setInterval(showNextSlide, window.heroImageIntervalMs || 3500);
+</script>
+
+</body>
+</html>
