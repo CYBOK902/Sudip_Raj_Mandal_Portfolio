@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cybok902.github.io/Sudip_Raj_Mandal_Portfolio/sitemap.xml
